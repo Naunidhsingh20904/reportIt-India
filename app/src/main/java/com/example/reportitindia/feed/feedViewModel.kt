@@ -1,9 +1,13 @@
 package com.example.reportitindia.feed
 
-
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import com.example.reportitindia.feed.Complaint
+import com.example.reportitindia.feed.ComplaintRepository
+
 
 class FeedViewModel : ViewModel() {
 
@@ -16,41 +20,22 @@ class FeedViewModel : ViewModel() {
     private val _state = MutableStateFlow<FeedState>(FeedState.Loading)
     val state: StateFlow<FeedState> = _state
 
+    // Repository is our connection to Firebase
+    private val repository = ComplaintRepository()
+
     init {
-        loadFakeFeed()
+        loadComplaints()
     }
 
-    private fun loadFakeFeed() {
-        _state.value = FeedState.Success(
-            listOf(
-                Complaint(
-                    id = "1",
-                    title = "Large pothole on MG Road",
-                    description = "Dangerous pothole causing accidents near the main junction.",
-                    location = "MG Road, Bangalore",
-                    category = "Roads",
-                    votes = 142,
-                    authorName = "Rahul M"
-                ),
-                Complaint(
-                    id = "2",
-                    title = "Garbage not collected for 2 weeks",
-                    description = "The garbage truck has not come to our street for 2 weeks.",
-                    location = "Koramangala, Bangalore",
-                    category = "Sanitation",
-                    votes = 89,
-                    authorName = "Priya S"
-                ),
-                Complaint(
-                    id = "3",
-                    title = "Broken streetlight near school",
-                    description = "Streetlight outside DAV School has been broken for a month.",
-                    location = "Jayanagar, Bangalore",
-                    category = "Electricity",
-                    votes = 67,
-                    authorName = "Amit K"
-                )
-            )
-        )
+    fun loadComplaints() {
+        viewModelScope.launch {
+            _state.value = FeedState.Loading
+            val result = repository.getComplaints()
+            _state.value = if (result.isSuccess) {
+                FeedState.Success(result.getOrNull() ?: emptyList())
+            } else {
+                FeedState.Error("Failed to load complaints. Check your connection.")
+            }
+        }
     }
 }
