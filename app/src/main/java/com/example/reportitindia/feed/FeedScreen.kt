@@ -1,4 +1,4 @@
-package com.example.myapplication.feed
+package com.example.reportitindia.feed
 
 
 import androidx.compose.foundation.layout.*

@@ -1,4 +1,4 @@
-package com.example.myapplication.landing
+package com.example.reportitindia.landing
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,7 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.ui.theme.AppTheme
+import com.example.reportitindia.ui.theme.AppTheme
 
 
 @Composable

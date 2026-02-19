@@ -1,13 +1,10 @@
-package com.example.myapplication.ui.theme
+package com.example.reportitindia.ui.theme
 
 import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.googlefonts.GoogleFont  // ✅ Fixed
 import androidx.compose.ui.text.googlefonts.Font        // ✅ Fixed
-import com.example.myapplication.R
+import com.example.reportitindia.R
 
 val provider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",

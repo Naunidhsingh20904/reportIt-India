@@ -1,4 +1,4 @@
-package com.example.myapplication.feed
+package com.example.reportitindia.feed
 
 // This is the blueprint for a single complaint
 // Every complaint in the app will have exactly these fields

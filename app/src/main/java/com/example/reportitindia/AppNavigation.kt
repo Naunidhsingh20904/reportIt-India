@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.reportitindia
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -11,12 +11,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.detail.DetailScreen
-import com.example.myapplication.feed.FeedScreen
-import com.example.myapplication.landing.LandingPage
-import com.example.myapplication.post.PostScreen
-import com.example.myapplication.profile.ProfileScreen
-import com.example.myapplication.settings.SettingsScreen
+import com.example.reportitindia.detail.DetailScreen
+import com.example.reportitindia.feed.FeedScreen
+import com.example.reportitindia.landing.LandingPage
+import com.example.reportitindia.post.PostScreen
+import com.example.reportitindia.profile.ProfileScreen
+import com.example.reportitindia.settings.SettingsScreen
 
 
 

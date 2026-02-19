@@ -1,4 +1,4 @@
-package com.example.myapplication.settings
+package com.example.reportitindia.settings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState

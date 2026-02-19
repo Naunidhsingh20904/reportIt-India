@@ -1,4 +1,4 @@
-package com.example.myapplication.profile
+package com.example.reportitindia.profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,7 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.feed.Complaint
+import com.example.reportitindia.feed.Complaint
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

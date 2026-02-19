@@ -1,4 +1,4 @@
-package com.example.myapplication.language
+package com.example.reportitindia.language
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.ui.theme.AppTheme
+import com.example.reportitindia.ui.theme.AppTheme
 
 class LanguageActivity : ComponentActivity() {
 
