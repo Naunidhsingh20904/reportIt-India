@@ -1,7 +1,5 @@
 package com.example.reportitindia.feed
 
-// This is the blueprint for a single complaint
-// Every complaint in the app will have exactly these fields
 data class Complaint(
     val id: String = "",
     val title: String = "",
@@ -10,5 +8,7 @@ data class Complaint(
     val category: String = "",
     val votes: Int = 0,
     val authorName: String = "",
+    val isAnonymous: Boolean = false,
+    val status: String = "",
     val timestamp: Long = 0L
 )

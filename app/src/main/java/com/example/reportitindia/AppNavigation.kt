@@ -17,6 +17,8 @@ import com.example.reportitindia.landing.LandingPage
 import com.example.reportitindia.post.PostScreen
 import com.example.reportitindia.profile.ProfileScreen
 import com.example.reportitindia.settings.SettingsScreen
+import com.example.reportitindia.auth.AuthScreen
+
 
 
 
@@ -38,6 +40,8 @@ object Routes {
     const val DETAIL = "detail/{complaintId}"
 
     const val SETTINGS = "settings"
+    const val AUTH = "auth"
+
 
 }
 
@@ -79,12 +83,18 @@ fun AppNavigation() {
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Routes.LANDING
+            startDestination = Routes.AUTH
         ) {
+            composable(Routes.AUTH) {
+                AuthScreen(
+                    onAuthSuccess = { navController.navigate(Routes.LANDING)}
+                )
+            }
             composable(Routes.LANDING) {
                 LandingPage(
                     onChooseLanguage = { },
                     onGetStarted = { navController.navigate(Routes.FEED) }
+
                 )
             }
 

@@ -13,6 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.reportitindia.feed.Complaint
+import com.example.reportitindia.feed.ComplaintRepository
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 // All the categories a complaint can belong to
 val complaintCategories = listOf(
@@ -20,12 +30,17 @@ val complaintCategories = listOf(
     "Parks", "Street Lights", "Drainage", "Other"
 )
 
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PostScreen(
     onBackClick: () -> Unit = {},
-    onSubmitSuccess: () -> Unit = {}
+    onSubmitSuccess: () -> Unit = {},
+    viewModel: PostViewModel = viewModel()
 ) {
+    val postState by viewModel.state.collectAsStateWithLifecycle()
+
     // Each variable here is one form field
     // mutableStateOf stores the current value
     // remember keeps it alive across redraws
@@ -39,6 +54,12 @@ fun PostScreen(
     var isSubmitting by remember { mutableStateOf(false) }
     var showSuccess by remember { mutableStateOf(false) }
 
+    LaunchedEffect(postState) {
+        if(postState is PostState.Success) {
+            showSuccess = true
+        }
+
+    }
     // Form is valid only when required fields are filled
     val isFormValid = title.isNotBlank()
             && description.isNotBlank()
