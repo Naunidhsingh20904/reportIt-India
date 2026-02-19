@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "327997211481",
+    "project_id": "reportit-india",
+    "storage_bucket": "reportit-india.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327997211481:android:c942ecbbed4d9872cd8248",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV6YuG71Ju64oiYwaVAHKVBaacxL-lpVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327997211481:android:1bc29eb4ab96ef19cd8248",
+        "android_client_info": {
+          "package_name": "com.example.reportitindia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV6YuG71Ju64oiYwaVAHKVBaacxL-lpVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
