@@ -48,7 +48,12 @@ object Routes {
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-
+    val authRepository = remember { com.example.reportitindia.auth.AuthRepository() }
+    val startDestination = if (authRepository.currentUser != null) {
+        Routes.FEED  // already logged in → skip to feed
+    } else {
+        Routes.AUTH  // not logged in → show auth screen
+    }
     val currentRoute = navController
         .currentBackStackEntryAsState().value?.destination?.route
 
@@ -83,7 +88,7 @@ fun AppNavigation() {
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Routes.AUTH
+            startDestination = startDestination
         ) {
             composable(Routes.AUTH) {
                 AuthScreen(
@@ -124,10 +129,15 @@ fun AppNavigation() {
                 )
 
             }
-
             composable(Routes.PROFILE) {
                 ProfileScreen(
-                    onSettingsClick = {navController.navigate(Routes.SETTINGS)}
+                    onSettingsClick = { navController.navigate(Routes.SETTINGS) },
+                    onSignOut = {
+                        com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+                        navController.navigate(Routes.AUTH) {
+                            popUpTo(0) { inclusive = true }
+                        }
+                    }
                 )
             }
             composable(Routes.SETTINGS) {

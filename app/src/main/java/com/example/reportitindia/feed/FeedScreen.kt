@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.LaunchedEffect
+
 
 @Composable
 fun FeedScreen(
@@ -26,6 +28,9 @@ fun FeedScreen(
     viewModel: FeedViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        viewModel.loadComplaints()
+    }
 
     Scaffold(
         // FAB = Floating Action Button

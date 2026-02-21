@@ -1,5 +1,7 @@
 package com.example.reportitindia.feed
 
+import com.google.firebase.firestore.PropertyName
+
 data class Complaint(
     val id: String = "",
     val title: String = "",
@@ -8,7 +10,9 @@ data class Complaint(
     val category: String = "",
     val votes: Int = 0,
     val authorName: String = "",
-    val isAnonymous: Boolean = false,
+    @get:PropertyName("isAnonymous")
+    @set:PropertyName("isAnonymous")
+    var isAnonymous: Boolean = false,
     val status: String = "",
     val timestamp: Long = 0L
 )

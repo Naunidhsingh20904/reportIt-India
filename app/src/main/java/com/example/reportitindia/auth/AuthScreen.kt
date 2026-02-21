@@ -30,6 +30,8 @@ fun AuthScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var keepSignedIn by remember { mutableStateOf(true) }
+
 
     // Navigate when auth succeeds
     LaunchedEffect(authState) {
@@ -137,6 +139,24 @@ fun AuthScreen(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Keep me signed in",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Switch(
+                checked = keepSignedIn,
+                onCheckedChange = { keepSignedIn = it }
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         // Submit button
         Button(
