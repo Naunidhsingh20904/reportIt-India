@@ -14,5 +14,6 @@ data class Complaint(
     @set:PropertyName("isAnonymous")
     var isAnonymous: Boolean = false,
     val status: String = "",
-    val timestamp: Long = 0L
+    val timestamp: Long = 0L,
+    val upvotedBy: List<String> = emptyList()
 )

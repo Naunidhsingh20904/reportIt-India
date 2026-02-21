@@ -82,7 +82,10 @@ fun DetailScreen(
             is DetailState.Success -> {
                 val complaint = currentState.complaint
                 val statusSteps = getStatusSteps(complaint.status)
-                var hasSupported by remember { mutableStateOf(false) }
+                val currentUserId = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                var hasSupported by remember {
+                    mutableStateOf(complaint.upvotedBy.contains(currentUserId))
+                }
 
                 Column(
                     modifier = Modifier

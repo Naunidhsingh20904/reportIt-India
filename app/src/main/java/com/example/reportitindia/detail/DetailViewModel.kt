@@ -35,16 +35,16 @@ class DetailViewModel : ViewModel() {
 
     fun upvoteComplaint(id: String) {
         viewModelScope.launch {
-            repository.upvoteComplaint(id)
-            // Reload complaint to show updated count
+            val userId = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid ?: return@launch
+            repository.upvoteComplaint(id, userId)
             loadComplaint(id)
         }
     }
 
     fun downvoteComplaint(id: String) {
         viewModelScope.launch {
-            repository.downvoteComplaint(id)
-            // Reload complaint to show updated count
+            val userId = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid ?: return@launch
+            repository.downvoteComplaint(id, userId)
             loadComplaint(id)
         }
     }

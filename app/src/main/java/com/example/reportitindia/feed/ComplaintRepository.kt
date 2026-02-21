@@ -62,13 +62,19 @@ class ComplaintRepository {
         }
     }
 
-    suspend fun upvoteComplaint(id: String): Result<Unit> {
+    suspend fun upvoteComplaint(id: String, userId: String): Result<Unit> {
         return try {
             val ref = db.collection("complaints").document(id)
             db.runTransaction { transaction ->
                 val snapshot = transaction.get(ref)
                 val currentVotes = snapshot.getLong("votes") ?: 0
-                transaction.update(ref, "votes", currentVotes + 1)
+                val upvotedBy = snapshot.get("upvotedBy") as? List<String> ?: emptyList()
+
+                // Only upvote if user hasn't already
+                if (!upvotedBy.contains(userId)) {
+                    transaction.update(ref, "votes", currentVotes + 1)
+                    transaction.update(ref, "upvotedBy", upvotedBy + userId)
+                }
             }.await()
             Result.success(Unit)
         } catch (e: Exception) {
@@ -76,18 +82,25 @@ class ComplaintRepository {
         }
     }
 
-    suspend fun downvoteComplaint(id: String): Result<Unit> {
+    suspend fun downvoteComplaint(id: String, userId: String): Result<Unit> {
         return try {
             val ref = db.collection("complaints").document(id)
             db.runTransaction { transaction ->
                 val snapshot = transaction.get(ref)
                 val currentVotes = snapshot.getLong("votes") ?: 0
-                // Don't go below 0
-                transaction.update(ref, "votes", maxOf(0, currentVotes - 1))
+                val upvotedBy = snapshot.get("upvotedBy") as? List<String> ?: emptyList()
+
+                // Only downvote if user has already upvoted
+                if (upvotedBy.contains(userId)) {
+                    transaction.update(ref, "votes", maxOf(0, currentVotes - 1))
+                    transaction.update(ref, "upvotedBy", upvotedBy - userId)
+                }
             }.await()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
+
+
 }
